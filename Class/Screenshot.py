@@ -1,4 +1,4 @@
-import re
+import re, zlib
 
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
@@ -9,6 +9,8 @@ from PIL import Image
 from io import BytesIO
 from pathlib import Path
 from time import sleep
+
+from .JSON import JSON
 
 class Screenshot():
 
@@ -138,7 +140,27 @@ class Screenshot():
 		   	}
 
 			img = img.crop((img_props['left'], img_props['top'], img_props['right'], img_props['bottom']))
-			img.save(f'Data/screenshot/{prop}/{prop}_{self.domain}.png')
+			
+			img_byte_arr = BytesIO()
+			img.save(img_byte_arr, format='PNG')
+			img_byte_arr = img_byte_arr.getvalue()
+
+			Path(f'./Model/{prop}').mkdir(parents=True, exist_ok=True)
+
+			data = str(zlib.compress(img_byte_arr))
+			json = JSON()
+
+			try:
+				prevents = json.list(pathfile=f'./Model/{prop}/{prop}_list.json')[prop]
+				if data not in prevents:
+					prevents.append(data)
+					json.write(data={
+						prop: prevents
+					}, pathfile=f'./Model/{prop}/{prop}_list.json')
+			except:
+				json.write(data={
+					prop: [data]
+				}, pathfile=f'./Model/{prop}/{prop}_list.json')
 
 		except Exception as arg:
 			print('Cannot save screenshot', arg)

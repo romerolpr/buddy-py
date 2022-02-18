@@ -18,31 +18,29 @@ try:
     # setting container json model
     compare.setJSONModel('\\Model\\inside_home.json')
 
-    compare.start_comparation()
-    compare.getResultNumber()
+    # compare.start_comparation()
+    # compare.getResultNumber()
 
-    # screenshot = Screenshot()
-    # screenshot.curl_url('http://localhost/site_base_full_beta/')
+    screenshot = Screenshot()
+    screenshot.curl_url('http://localhost/ricex.com.br/')
 
     # add new prop
-    # screenshot.add_props('wrapper', '.wrapper')
+    screenshot.add_props('wrapper', '.wrapper')
     # screenshot.add_props('section', 'section')
     # screenshot.add_props('footer_copyright', '.copyright-footer')
 
-    # screenshot.take_screenshot('wrapper', index=2)
-    # screenshot.take_screenshot('section')
-    # screenshot.take_screenshot('footer_copyright')
+    screenshot.take_screenshot('wrapper', index=2)
 
-    # screenshot.take_screenshot('topo')
-    # screenshot.take_screenshot('banner')
-    # screenshot.take_screenshot('footer')
-    # screenshot.take_screenshot('mpi_home')
-    # screenshot.curl_url('http://localhost/site_base_full_beta/exemplo-mpi-icm')
-    # screenshot.take_screenshot('mpi_page_aside')
-    # screenshot.take_screenshot('mpi_page_region')
-    # screenshot.take_screenshot('mpi_page_breadcrumb')
+    screenshot.take_screenshot('topo')
+    screenshot.take_screenshot('banner')
+    screenshot.take_screenshot('footer')
+    screenshot.take_screenshot('mpi_home')
+    screenshot.curl_url('http://localhost/ricex.com.br/alimentos-importados-da-italia')
+    screenshot.take_screenshot('mpi_page_aside')
+    screenshot.take_screenshot('mpi_page_region')
+    screenshot.take_screenshot('mpi_page_breadcrumb')
 
-    # screenshot.kill()
+    screenshot.kill()
 
 
 except Exception as arg:
